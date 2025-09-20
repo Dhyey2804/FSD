@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<style>
+    .container {
+        text-align: center;
+        border: 2px solid rgb(31, 181, 44);
+        font-family: Arial, sans-serif;
+        margin-top: 50px;
+        padding: 20px;
+    }
+
+    .button button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .results {
+        margin-top: 30px;
+        font-size: 18px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Vote Your Favourite Programming Language</h1>
+        <div class="button">
+            <button onclick="castvote('Javascript')" id="javascript">Javascript</button>
+            <button onclick="castvote('python')" id="python">Python</button>
+            <button onclick="castvote('c')" id="c++">C</button>
+            <button onclick="castvote('java')" id="java">Java</button>
+        </div>
+
+        <div class="results">
+            <p>Javascript: <span id="javascriptCount">0</span></p>
+            <p>Python: <span id="pythonCount">0</span></p>
+            <p>C: <span id="cCount">0</span></p>
+            <p>Java: <span id="javaCount">0</span></p>
+
+        </div>
+    </div>
+
+    <script>
+        const objects = {
+            Javascript: 0,
+            python: 0,
+            c: 0,
+            java: 0
+        };
+
+        function castvote(language) {
+            objects[language]++;
+            displayvote();
+        }
+        function displayvote() {
+            const container = document.querySelector('.results');
+            container.innerHTML = `
+            <p>Javascript: <span id="javascriptCount">${objects.Javascript}</span></p>
+            <p>Python: <span id="pythonCount">${objects.python}</span></p>
+            <p>C: <span id="cCount">${objects.c}</span></p>
+            <p>Java: <span id="javaCount">${objects.java}</span></p>
+        `;
+
+
+        }
+        displayvote();
+
+        setInterval(() => {
+            const language = Object.keys(objects);
+            const randomlanguage = language[Math.floor(Math.random() * language.length)];
+            objects[randomlanguage]++;
+            displayvote();
+        }, 2000);
+
+    </script>
+</body>
+
+</html>
